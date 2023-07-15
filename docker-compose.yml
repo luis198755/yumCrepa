@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - '88:80'
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+      - ./assets:/usr/share/nginx/html/assets
+      - ./forms:/usr/share/nginx/html/forms
+      - ./sample-inner-page.html:/usr/share/nginx/html/sample-inner-page.html
