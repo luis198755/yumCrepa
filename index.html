@@ -31,8 +31,18 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- Link to Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .center-div {
+        text-align: center; /* Centers inline-elements or inline-block elements horizontally */
+    }
+    .pdf-viewer {
+        width: 50rem; /* Set the width of the PDF viewer */
+        height: 40rem; /* Set the height of the PDF viewer */
+        display: inline-block; /* This makes the embed tag center-alignable by text-align */
+        margin: auto; /* Applies automatic margin to all sides, helping in centering if flex or grid are used */
+    }
+  </style>
+
 
   <!-- =======================================================
   * Template Name: Yummy
@@ -274,16 +284,12 @@
           <p>Conoce nuestro <span>Menú</span></p>
         </div>
 
-        <div class="container mt-5">
-          <div class="row">
-              <div class="col-12">
-                  <!-- Responsive embed for the PDF -->
-                  <div class="embed-responsive embed-responsive-1by1">
-                      <iframe class="embed-responsive-item" src="./Menu-La-56-B.pdf" allowfullscreen></iframe>
-                  </div>
-              </div>
-          </div>
+        
+        <div class="center-div">
+          <!-- Embedding the PDF inside a div that centers its content -->
+          <embed src="Menu-La-56-B.pdf" type="application/pdf" class="pdf-viewer">
         </div>
+
      </div>
 
     </section><!-- End Gallery Section -->
@@ -496,11 +502,6 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
-  <!-- Link to Bootstrap JS and Popper.js -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 
