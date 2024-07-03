@@ -11,6 +11,8 @@
   <meta property="og:image" content="assets/img/logo2.jpg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+
 
   <!-- Favicons -->
   <link href="assets/img/favicon.ico" rel="icon">
@@ -57,6 +59,36 @@
     .rounded-corners {
       border-radius: 15px; /* Adjust this value to increase or decrease the rounding */
     }
+
+    body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        #toolbar {
+            background-color: #f0f0f0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #pageNumber {
+            margin: 0 10px;
+        }
+        #viewer {
+            flex-grow: 1;
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
 </style>
 
   <!-- =======================================================
@@ -262,14 +294,23 @@
         </div>
 
         
-        <div class="pdf-container">
+        <!-- <div class="pdf-container"> -->
           <!-- <h1> Descarga el Menú</h1> -->
           <!-- Embed the PDF for viewing -->
-          <embed src="Menu-La-56-B.pdf" type="application/pdf">
+          <!-- <embed src="Menu-La-56-B.pdf" type="application/pdf"> -->
           
           <!-- Provide a download link for the PDF -->
-          <p><a href="Menu-La-56-B.pdf" class="download-link" download="Menú-La-56-B.pdf">DESCARGA MENÚ AQUÍ</a></p>
-        </div>
+          <!-- <p><a href="Menu-La-56-B.pdf" class="download-link" download="Menú-La-56-B.pdf">DESCARGA MENÚ AQUÍ</a></p> -->
+        <!-- </div> -->
+
+        <div id="toolbar">
+          <button id="prev">Previous</button>
+          <span id="pageNumber"></span>
+          <button id="next">Next</button>
+      </div>
+      <div id="viewer">
+          <canvas id="pdfViewer"></canvas>
+      </div>
 
 
      </div>
@@ -473,6 +514,77 @@
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader"></div>
+
+  <script>
+    let pdfDoc = null;
+    let pageNum = 1;
+    let pageRendering = false;
+    let pageNumPending = null;
+    let scale = 1.5;
+    const canvas = document.getElementById('pdfViewer');
+    const ctx = canvas.getContext('2d');
+
+    function renderPage(num) {
+        pageRendering = true;
+        pdfDoc.getPage(num).then((page) => {
+            const viewport = page.getViewport({scale: scale});
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            const renderTask = page.render(renderContext);
+
+            renderTask.promise.then(() => {
+                pageRendering = false;
+                if (pageNumPending !== null) {
+                    renderPage(pageNumPending);
+                    pageNumPending = null;
+                }
+            });
+        });
+
+        document.getElementById('pageNumber').textContent = `Page ${num} of ${pdfDoc.numPages}`;
+    }
+
+    function queueRenderPage(num) {
+        if (pageRendering) {
+            pageNumPending = num;
+        } else {
+            renderPage(num);
+        }
+    }
+
+    function onPrevPage() {
+        if (pageNum <= 1) {
+            return;
+        }
+        pageNum--;
+        queueRenderPage(pageNum);
+    }
+
+    function onNextPage() {
+        if (pageNum >= pdfDoc.numPages) {
+            return;
+        }
+        pageNum++;
+        queueRenderPage(pageNum);
+    }
+
+    document.getElementById('prev').addEventListener('click', onPrevPage);
+    document.getElementById('next').addEventListener('click', onNextPage);
+
+    // Load the predetermined PDF file
+    pdfjsLib.getDocument('Menu-La-56-B.pdf').promise.then((pdf) => {
+        pdfDoc = pdf;
+        renderPage(pageNum);
+    }).catch((error) => {
+        console.error('Error loading PDF:', error);
+        document.getElementById('viewer').innerHTML = '<p>Error loading PDF. Please make sure the file "crepas.pdf" exists in the same directory as this HTML file.</p>';
+    });
+</script>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
