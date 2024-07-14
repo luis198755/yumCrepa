@@ -83,6 +83,76 @@
             max-width: 100%;
             height: auto;
         }
+
+        .social-integration {
+  display: flex;
+  align-items: center;
+}
+
+.btn-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-social:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-facebook {
+  background-color: #3b5998;
+}
+
+.btn-instagram {
+  background-color: #e1306c;
+}
+
+.btn-twitter {
+  background-color: #1da1f2;
+}
+
+.btn-whatsapp {
+  background-color: #25D366;
+}
+
+@media (max-width: 991px) {
+  .d-flex.align-items-center {
+    justify-content: center;
+  }
+}
+
+/* Floating WhatsApp Button */
+.float-whatsapp {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #25d366;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.float-whatsapp:hover {
+  background-color: #20ba5a;
+  color: #FFF;
+}
 </style>
 
   <!-- =======================================================
@@ -95,6 +165,11 @@
 </head>
 
 <body>
+
+  <!-- Floating WhatsApp Button -->
+<a href="https://wa.me/522221139817" class="float-whatsapp" target="_blank" aria-label="Contáctanos por WhatsApp">
+  <i class="bi bi-whatsapp"></i>
+</a>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -158,24 +233,37 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="hero d-flex align-items-center section-bg">
-    <div class="container">
-      <div class="row justify-content-between gy-5">
-        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
-          <h2 data-aos="fade-up">Disfruta Nuestras<br>Deliciosas Crepas y Bebidas</h2>
-          <p data-aos="fade-up" data-aos-delay="100">Somos Crepería la 56-B, dedicados a ofrecer deliciosas crepas dulces y saladas, acompañadas de refrescantes bebidas.</p>
-          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            <a href="#contact" class="btn-book-a-table">Ubicación</a>
-            <!--<a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>-->
+<section id="hero" class="hero d-flex align-items-center section-bg">
+  <div class="container">
+    <div class="row justify-content-between gy-5">
+      <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+        <h2 data-aos="fade-up">Disfruta Nuestras<br>Deliciosas Crepas y Bebidas</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Somos Crepería la 56-B, dedicados a ofrecer deliciosas crepas dulces y saladas, acompañadas de refrescantes bebidas.</p>
+        <div class="d-flex align-items-center flex-wrap" data-aos="fade-up" data-aos-delay="200">
+          <a href="#contact" class="btn-book-a-table me-3 mb-2">Ubicación</a>
+          <!-- Social Media Integration -->
+          <div class="social-integration d-flex align-items-center mb-2">
+            <a href="https://www.facebook.com/creperiala56b" target="_blank" class="btn-social btn-facebook me-2" aria-label="Facebook">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/creperia.la56_b/" target="_blank" class="btn-social btn-instagram me-2" aria-label="Instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <!-- <a href="#" target="_blank" class="btn-social btn-twitter me-2" aria-label="Twitter">
+              <i class="bi bi-twitter"></i>
+            </a> -->
+            <a href="https://wa.me/522221139817" target="_blank" class="btn-social btn-whatsapp" aria-label="WhatsApp">
+              <i class="bi bi-whatsapp"></i>
+            </a>
           </div>
         </div>
-        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
-          <img src="assets/img/hero-img.webp" class="img-fluid rounded-corners" alt="" data-aos="zoom-out" data-aos-delay="300">
-        </div>
-      
+      </div>
+      <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+        <img src="assets/img/hero-img.webp" class="img-fluid rounded-corners" alt="" data-aos="zoom-out" data-aos-delay="300">
       </div>
     </div>
-  </section><!-- End Hero Section -->
+  </div>
+</section><!-- End Hero Section -->
 
   <main id="main">
 
