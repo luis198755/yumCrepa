@@ -128,13 +128,13 @@
   }
 }
 
-/* Floating WhatsApp Button */
+/* Floating WhatsApp Button - Modificado para el lado izquierdo */
 .float-whatsapp {
   position: fixed;
   width: 60px;
   height: 60px;
   bottom: 40px;
-  right: 40px;
+  left: 40px; /* Cambiado de 'right' a 'left' */
   background-color: #25d366;
   color: #FFF;
   border-radius: 50px;
@@ -152,6 +152,17 @@
 .float-whatsapp:hover {
   background-color: #20ba5a;
   color: #FFF;
+}
+
+/* Media query para ajustar en pantallas pequeñas */
+@media (max-width: 767px) {
+  .float-whatsapp {
+    width: 50px;
+    height: 50px;
+    left: 20px;
+    bottom: 20px;
+    font-size: 25px;
+  }
 }
 </style>
 
